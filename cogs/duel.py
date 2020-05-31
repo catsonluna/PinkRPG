@@ -72,8 +72,8 @@ class Duel(commands.Cog):
         if member is None:
             await ctx.send("You have to specify who your hitting")
         else:
-            user2 = duel.find_one({"User2 id": f"{ctx.author.id}"})
-            user1 = duel.find_one({"User1 id": f"{member.id}"})
+            duel.find_one({"User2 id": f"{ctx.author.id}"})
+            duel.find_one({"User1 id": f"{member.id}"})
 
 
 def setup(bot):
