@@ -205,7 +205,7 @@ class Attack(commands.Cog):
         health = attack.find(
             {"guild id": f"{ctx.guild.id}"})
         if channel:
-            for x in gid:
+            for _ in gid:
                 if not user:
                     color = ctx.author.color
                     embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
@@ -420,7 +420,7 @@ class Attack(commands.Cog):
         health = attack.find(
             {"guild id": f"{ctx.guild.id}"})
         if channel:
-            for x in gid:
+            for _ in gid:
                 if not user:
                     color = ctx.author.color
                     embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
