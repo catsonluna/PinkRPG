@@ -16,7 +16,7 @@ class Inventory(commands.Cog):
     @commands.command(pass_context=True)
     async def shop(self, ctx):
         color = ctx.author.color
-        embed = discord.Embed(title=f'PinkBots shop', colour=color, timestamp=datetime.datetime.utcnow())
+        embed = discord.Embed(title='PinkBots shop', colour=color, timestamp=datetime.datetime.utcnow())
         embed.add_field(name="info",
                         value="This is the PinkBots shop, to buy something do >buy and the number of the item",
                         inline=False)

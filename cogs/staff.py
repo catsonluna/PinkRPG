@@ -38,7 +38,7 @@ class PrivateCommands(commands.Cog):
             channel = await member.create_dm()
             channel2 = bot.get_channel(698635545408045087)
             color = ctx.author.color
-            embed = discord.Embed(title=f'Dm from PinkBot', colour=color, timestamp=datetime.datetime.utcnow())
+            embed = discord.Embed(title='Dm from PinkBot', colour=color, timestamp=datetime.datetime.utcnow())
             embed.add_field(name="Name of the receiver:", value=f"{member}")
             embed.add_field(name="Message:", value=f"{message}", inline=False)
             embed.add_field(name="Note:",

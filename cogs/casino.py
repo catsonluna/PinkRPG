@@ -53,7 +53,7 @@ class Duel(commands.Cog):
                         number = random.randint(1, 6)
                         if arg1 == number:
                             color = ctx.author.color
-                            embed = discord.Embed(title=f'Dice game', colour=color,
+                            embed = discord.Embed(title='Dice game', colour=color,
                                                   timestamp=datetime.datetime.utcnow())
                             embed.add_field(name="Your number:", value=f"{arg1}", inline=False)
                             embed.add_field(name="Dice number", value=number, inline=False)
@@ -76,7 +76,7 @@ class Duel(commands.Cog):
                             await ctx.send(embed=embed)
                         else:
                             color = ctx.author.color
-                            embed = discord.Embed(title=f'Dice game', colour=color,
+                            embed = discord.Embed(title='Dice game', colour=color,
                                                   timestamp=datetime.datetime.utcnow())
                             embed.add_field(name="Your number:", value=f"{arg1}", inline=False)
                             embed.add_field(name="Dice number", value=number, inline=False)
@@ -149,7 +149,7 @@ class Duel(commands.Cog):
                     if arg1 == "tails" or arg1 == "heads":
                         if arg1 == coin:
                             color = ctx.author.color
-                            embed = discord.Embed(title=f'CoinFlip game', colour=color,
+                            embed = discord.Embed(title='CoinFlip game', colour=color,
                                                   timestamp=datetime.datetime.utcnow())
                             embed.add_field(name="You picked:", value=f"{arg1}", inline=False)
                             embed.add_field(name="Coin:", value=coin, inline=False)
@@ -171,7 +171,7 @@ class Duel(commands.Cog):
                             await ctx.send(embed=embed)
                         else:
                             color = ctx.author.color
-                            embed = discord.Embed(title=f'CoinFlip game', colour=color,
+                            embed = discord.Embed(title='CoinFlip game', colour=color,
                                                   timestamp=datetime.datetime.utcnow())
                             embed.add_field(name="You Picked:", value=f"{arg1}", inline=False)
                             embed.add_field(name="Coin", value=coin, inline=False)
