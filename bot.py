@@ -30,6 +30,7 @@ def get_prefix(bot, message):
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
+# test
 
 cluster = MongoClient(dbpass)
 db = cluster["discord"]
