@@ -21,7 +21,7 @@ class PrivateCommands(commands.Cog):
         user = uinfo.find_one({'User id': f'{ctx.author.id}'})
         if user["Titles"]["Banned"] == 1:
             await ctx.send(
-                f"You may not use this command as you are blacklisted on PinkBot, for more info join PinkBots support server https://discord.gg/TUkcgWt")
+                "You may not use this command as you are blacklisted on PinkBot, for more info join PinkBots support server https://discord.gg/TUkcgWt")
         else:
             channel = bot.get_channel(698581537066582066)
             channel2 = bot.get_channel(698581569371373610)
@@ -65,7 +65,7 @@ class PrivateCommands(commands.Cog):
         user = uinfo.find_one({'User id': f'{ctx.author.id}'})
         if user["Titles"]["Banned"] == 1:
             await ctx.send(
-                f"You may not use this command as you are blacklisted on PinkBot, for more info join PinkBots support server [here](https://discord.gg/TUkcgWt)")
+                "You may not use this command as you are blacklisted on PinkBot, for more info join PinkBots support server [here](https://discord.gg/TUkcgWt)")
         else:
             channel = bot.get_channel(698635497966403636)
             color = ctx.author.color

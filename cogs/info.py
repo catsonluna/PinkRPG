@@ -84,7 +84,7 @@ class UserInfo(commands.Cog):
             embed.add_field(name="Equipped weapon:", value=user["Active Weapon"], inline=False)
 
             if user["Titles"]['Some title'] == 1:
-                embed.add_field(name="Titles:", value=f"All titles:", inline=False)
+                embed.add_field(name="Titles:", value="All titles:", inline=False)
                 if user["Titles"]['Owner'] == 1:
                     embed.add_field(name="Owner:", value="PinkBot owner", inline=True)
 
@@ -121,7 +121,7 @@ class UserInfo(commands.Cog):
             embed.add_field(name="Xp required for next level:", value=f"{lvl}", inline=False)
             await ctx.send(embed=embed)
         else:
-            await ctx.send(f"Please do >setChannel to view this")
+            await ctx.send("Please do >setChannel to view this")
 
     @commands.command(pass_context=True)
     async def bossInfo(self, ctx):
@@ -129,7 +129,7 @@ class UserInfo(commands.Cog):
         guildI = attack.find_one({"guild id": f"{guild.id}"})
         if guildI:
             color = ctx.author.color
-            embed = discord.Embed(title=f'Boss stats', colour=color, timestamp=datetime.datetime.utcnow())
+            embed = discord.Embed(title='Boss stats', colour=color, timestamp=datetime.datetime.utcnow())
             embed.add_field(name="Boss level:", value=f"{guildI['Boss level']}", inline=False)
             embed.add_field(name="Health", value=guildI["health"], inline=False)
             await ctx.send(embed=embed)
@@ -141,7 +141,7 @@ class UserInfo(commands.Cog):
         user = uinfo.find_one({"_id": 1})
         server = ginfo.find_one({"_id": 1})
         color = ctx.author.color
-        embed = discord.Embed(title=f'Bot stats', colour=color, timestamp=datetime.datetime.utcnow())
+        embed = discord.Embed(title='Bot stats', colour=color, timestamp=datetime.datetime.utcnow())
         embed.add_field(name="Registered users:", value=f"{user['Users']}", inline=False)
         embed.add_field(name="Registered servers", value=server["Guilds"], inline=False)
         embed.add_field(name="Bosses spawned", value=server["bosses spawned"], inline=False)

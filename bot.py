@@ -54,7 +54,7 @@ bot.load_extension("jishaku")
 @bot.event
 async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=discord.Game('Ima be on soon ;)'))
-    print(f'Y-you tu-urned mwe on successfully daddy uwu, im looking at')
+    print('Y-you tu-urned mwe on successfully daddy uwu, im looking at')
     print(bot.cogs)
     print("Guilds im in:")
     print(len(bot.guilds))

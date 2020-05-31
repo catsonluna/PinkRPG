@@ -291,7 +291,7 @@ class Info(commands.Cog):
             uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"version": version}})
             await ctx.send(f"You have updated to `version {version}`")
         else:
-            await ctx.send(f"You already are on the latest version")
+            await ctx.send("You already are on the latest version")
 
 
 def setup(bot):
