@@ -14,9 +14,9 @@ class HelpCommand(commands.Cog):
         color = ctx.author.color
         embed = discord.Embed(title='PinkBot help', colour=color, timestamp=datetime.datetime.utcnow())
         embed.add_field(name="Links:", value="[Website](http://pinkbot.xyz)"
-                                             f"\n[Commands](https://docs.pinkbot.xyz/) "
-                                             f"\n[Support server](http://support.pinkbot.xyz) "
-                                             f"\n[Vote for the bot](https://top.gg/bot/697887266307047424)", inline=False)
+                                             "\n[Commands](https://docs.pinkbot.xyz/) "
+                                             "\n[Support server](http://support.pinkbot.xyz) "
+                                             "\n[Vote for the bot](https://top.gg/bot/697887266307047424)", inline=False)
         embed.add_field(name="Developer:", value="Pinkulu", inline=False)
         await ctx.send(embed=embed)
 
