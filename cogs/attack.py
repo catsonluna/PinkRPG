@@ -4,7 +4,7 @@ import random
 import discord
 from discord.ext import commands
 
-from bot import db, version
+from bot import db
 
 attack = db["attack"]
 
