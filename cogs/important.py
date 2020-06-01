@@ -144,6 +144,14 @@ class Info(commands.Cog):
                 await ctx.send("Weapon equipped")
             else:
                 await ctx.send("You dont have this weapon")
+        elif arg1 == "Pride2020" or arg1 == "pride2020":
+            if user["Weapons"]["Pride2020 Sword"] == 1:
+                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Active Weapon": "Pride2020 Sword"}})
+                await ctx.send("Weapon equipped")
+            else:
+                await ctx.send("You dont have this weapon")
+        else:
+            await ctx.send("That weapon dosnt exist")
 
     @commands.command(pass_context=True)
     async def register(self, ctx, arg1: str = None):
@@ -187,7 +195,9 @@ class Info(commands.Cog):
                             "Coin Sword": 0,
                             "Dragon Sword": 0,
                             "Rainbow Sword": 0,
-                            "Pink Sword": 0},
+                            "Pink Sword": 0,
+                            # Special rarity
+                            "Pride2020 Sword": 0},
                         "Armor": {
                             "Helmet": {
                                 "Stone": 0,
@@ -247,9 +257,7 @@ class Info(commands.Cog):
                         "Items": {"Coin Booster": 0,
                                   "Damage Booster": 0},
                         "Registration date": f"{dateT}",
-                        "Stats.crits made": 0,
-                        "Stats.crits successful": 0,
-                        "version": {version}}
+                        "version": version}
                 user = uinfo.find_one({'User id': f'{ctx.author.id}'})
                 if not user:
                     uinfo.insert_one(info)
@@ -284,14 +292,47 @@ class Info(commands.Cog):
     @commands.command()
     async def update(self, ctx):
         user = uinfo.find_one({"User id": f"{ctx.author.id}"})
-        uinfo.update_one({"_id": 1}, {"$inc": {"crits made": +1}})
-        if user["version"] < version:
-            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Stats.crits made": 0}})
-            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Stats.crits successful": 0}})
-            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"version": version}})
-            await ctx.send(f"You have updated to `version {version}`")
+        if user is None:
+            color = ctx.author.color
+            embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
+            embed.add_field(name="Error:", value="Please do >register to do this command.")
+            await ctx.send(embed=embed)
         else:
-            await ctx.send("You already are on the latest version")
+            if user["version"] < 0.2:
+                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Stats.crits made": 0}})
+                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Stats.crits successful": 0}})
+                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"version": 0.2}})
+                await ctx.send(f"You have updated to `version 0.2`")
+            if user["version"] < 0.3:
+                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"pride2020": 0}})
+                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Weapons.Pride2020 Sword": 0}})
+                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"version": 0.3}})
+                await ctx.send(f"You have updated to `version 0.3`")
+            else:
+                await ctx.send("You already are on the latest version")
+
+    @commands.command()
+    async def pride(self, ctx):
+        user = uinfo.find_one({"User id": f"{ctx.author.id}"})
+        if user:
+            if user["version"] < 0.3:
+                await ctx.send("Please >update, as you need to have version 0.3 or higher to use this command")
+            else:
+                if user["pride2020"] == 0:
+                    uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": +2000}})
+                    uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Pink coins": +2000}})
+                    uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Weapons.Pride2020 Sword": 1}})
+                    uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"pride2020": 1}})
+                    uinfo.update_one({"_id": 1}, {"$inc": {"pride2020": +1}})
+                    uinfo.update_one({"_id": 1}, {"$inc": {"Lifetime coins": +2000}})
+                    await ctx.send("You have claimed your pride month gift")
+                else:
+                    await ctx.send("You have already claimed the gift")
+        else:
+            color = ctx.author.color
+            embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
+            embed.add_field(name="Error:", value="Please do >register to do this command.")
+            await ctx.send(embed=embed)
 
 
 def setup(bot):

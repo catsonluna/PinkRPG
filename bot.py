@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import discord
 from discord.ext import commands
 
-version = 1.2
+version = 0.3
 
 
 def getJSON(filePathAndName):
@@ -21,7 +21,7 @@ token = private.get("token")
 
 
 def get_prefix(bot, message):
-    prefixes = ["pink ", "pinkRPG ", '>']
+    prefixes = ["pink ", "pinkRPG ", '>', "Pink ", "PinkRPG "]
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
@@ -39,6 +39,7 @@ initial_extensions = [
     "cogs.shop",
     "cogs.casino",
     "cogs.staff",
+    "cogs.other",
     "cogs.attack"
 ]
 

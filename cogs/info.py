@@ -3,7 +3,7 @@ import datetime
 import discord
 from discord.ext import commands
 
-from bot import db
+from bot import db, version
 
 uinfo = db["uinfo"]
 attack = db["attack"]
@@ -30,6 +30,7 @@ class UserInfo(commands.Cog):
             embed.add_field(name="Times attacked", value=user['Stats']["Times attacked"], inline=False)
             embed.add_field(name="Registration date:", value=user['Registration date'], inline=False)
             embed.add_field(name="Weapons:", value=f"all {member} weapons:", inline=False)
+
             if user["Weapons"]['Default Sword'] == 1:
                 embed.add_field(name="Default Sword:", value="1 dmg", inline=True)
 
@@ -41,6 +42,12 @@ class UserInfo(commands.Cog):
 
             if user["Weapons"]['Flower Sword'] == 1:
                 embed.add_field(name="Flower Sword:", value="4 dmg", inline=True)
+
+            if user["Weapons"].get('Pride2020 Sword') is None:
+                pass
+            else:
+                if user["Weapons"]['Pride2020 Sword'] == 1:
+                    embed.add_field(name="Pride2020 Sword:", value="4 dmg", inline=True)
 
             if user["Weapons"]['Strong Sword'] == 1:
                 embed.add_field(name="Strong Sword:", value="5 dmg", inline=True)
@@ -74,13 +81,16 @@ class UserInfo(commands.Cog):
 
             if user["Weapons"]['Dragon Sword'] == 1:
                 embed.add_field(name="Dragon Sword:", value="11 dmg", inline=True)
-
+            else:
+                pass
             if user["Weapons"]['Rainbow Sword'] == 1:
                 embed.add_field(name="Rainbow Sword:", value="12 dmg", inline=True)
-
+            else:
+                pass
             if user["Weapons"]['Pink Sword'] == 1:
                 embed.add_field(name="PinkSword Sword:", value="15 dmg", inline=True)
-
+            else:
+                pass
             embed.add_field(name="Equipped weapon:", value=user["Active Weapon"], inline=False)
 
             if user["Titles"]['Some title'] == 1:
@@ -145,6 +155,7 @@ class UserInfo(commands.Cog):
         embed.add_field(name="Registered users:", value=f"{user['Users']}", inline=False)
         embed.add_field(name="Registered servers", value=server["Guilds"], inline=False)
         embed.add_field(name="Bosses spawned", value=server["bosses spawned"], inline=False)
+        embed.add_field(name="Latest version", value=version, inline=False)
         await ctx.send(embed=embed)
 
 

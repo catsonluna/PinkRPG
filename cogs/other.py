@@ -33,7 +33,7 @@ class PrivateCommands(commands.Cog):
             sent = await channel.send(embed=embed)
             await ctx.send("Your suggestion has been sent")
 
-            def check(reaction):
+            def check(reaction, user_id):
                 return reaction.message.id == sent.id
 
             try:

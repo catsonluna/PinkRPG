@@ -29,7 +29,7 @@ class CommandErrorHandler(commands.Cog):
             return await ctx.send(f"You are missing `{error.missing_perms}` permission(s)")
 
         elif isinstance(error, commands.CommandOnCooldown):
-            if error.retry_after / 3600 >= 60:
+            if error.retry_after / 3600 >= 1:
                 return await ctx.send(
                     f'you can do `{ctx.command}` in {error.retry_after / 3600:.0f} hrs ')
             else:
@@ -37,10 +37,7 @@ class CommandErrorHandler(commands.Cog):
                     f'you can do `{ctx.command}` in {error.retry_after / 60:.0f} mins {error.retry_after % 60:.0f} secs ')
 
         elif isinstance(error, commands.NoPrivateMessage):
-            try:
-                return await ctx.author.send(f'{ctx.command} can not be used in Private Messages.')
-            except:
-                pass
+            return await ctx.author.send(f'{ctx.command} can not be used in Private Messages.')
 
         elif isinstance(error, commands.BadArgument):
             if ctx.command.qualified_name == 'tag list':

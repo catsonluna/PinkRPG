@@ -21,27 +21,27 @@ class Inventory(commands.Cog):
                         value="This is the PinkBots shop, to buy something do >buy and the number of the item",
                         inline=False)
 
-        embed.add_field(name="Wood sword",
-                        value="Description: \nMade from the best wood by the best woodsman will slice your enemies like paper \n "
-                              "\nQuality: \nCommon \n "
-                              "\nDamage: \n2 \n "
-                              "\nPrice: \n200PC \n"
+        embed.add_field(name="Flower sword",
+                        value="Description: \nFound in the rarest flower, in a unknown location, the smell of this sword is fantastic \n "
+                              "\nQuality: \nRare  \n "
+                              "\nDamage: \n4 \n "
+                              "\nPrice: \n600PC"
                               "\nCommand: \n>buy 1",
                         inline=True)
 
-        embed.add_field(name="Strong sword",
-                        value="Description: \nMade for the strongest and only for the strongest, this sword will slay everyone \n "
-                              "\nQuality: \nRare \n "
-                              "\nDamage: \n5 \n "
-                              "\nPrice: \n1000PC \n"
+        embed.add_field(name="Destruction sword",
+                        value="Description: \nThis sword will destroy everyone and everything, it will destroy worlds if its in the wrong arms, so be safe \n "
+                              "\nQuality: \nRare  \n "
+                              "\nDamage: \n6 \n "
+                              "\nPrice: \n2000PC"
                               "\nCommand: \n>buy 2",
                         inline=True)
 
-        embed.add_field(name="Soul sword",
-                        value="Description: \nCrafted from million dead souls, you will hear their screams \n "
-                              "\nQuality: \nEpic \n "
-                              "\nDamage: \n7 \n "
-                              "\nPrice: \n3500PC \n"
+        embed.add_field(name="Dark sword",
+                        value="Description: \nThe sword of the dark, taken from the darkest part of the multi-verse, the power this sword gives is imaginable \n "
+                              "\nQuality: \nEpic  \n "
+                              "\nDamage: \n8 \n "
+                              "\nPrice: \n4000PC"
                               "\nCommand: \n>buy 3",
                         inline=True)
 
@@ -54,45 +54,45 @@ class Inventory(commands.Cog):
             if arg1 is None:
                 await ctx.send("please specify a thing you want to buy")
             elif arg1 == 1:
-                if user["Pink coins"] >= 200:
-                    if user["Weapons"]["Stone Sword"] == 1:
+                if user["Pink coins"] >= 600:
+                    if user["Weapons"]["Flower Sword"] == 1:
                         await ctx.send("You already have this weapon")
                     else:
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": -200}})
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Weapons.Wood Sword": 1}})
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Coins used": +200}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": -600}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Weapons.Flower Sword": 1}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Coins used": +600}})
                         uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Things purchased": +1}})
-                        uinfo.update_one({"_id": 1}, {"$inc": {"Coins used": +200}})
+                        uinfo.update_one({"_id": 1}, {"$inc": {"Coins used": +600}})
                         uinfo.update_one({"_id": 1}, {"$inc": {"Things purchased": +1}})
-                        await ctx.send("You have bought Stone sword")
+                        await ctx.send("You have bought Flower sword")
                 else:
                     await ctx.send("You dont have enough coins")
             elif arg1 == 2:
-                if user["Pink coins"] >= 1000:
+                if user["Pink coins"] >= 2000:
                     if user["Weapons"]["Strong Sword"] == 1:
                         await ctx.send("You already have this weapon")
                     else:
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": - 1000}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": - 2000}})
                         uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Weapons.Strong Sword": 1}})
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Coins used": +1000}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Coins used": +2000}})
                         uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Things purchased": +1}})
-                        uinfo.update_one({"_id": 1}, {"$inc": {"Coins used": +1000}})
+                        uinfo.update_one({"_id": 1}, {"$inc": {"Coins used": +2000}})
                         uinfo.update_one({"_id": 1}, {"$inc": {"Things purchased": +1}})
                         await ctx.send("You have bought Strong sword")
                 else:
                     await ctx.send("You dont have enough coins")
             elif arg1 == 3:
-                if user["Pink coins"] >= 3500:
-                    if user["Weapons"]["Soul Sword"] == 1:
+                if user["Pink coins"] >= 4000:
+                    if user["Weapons"]["Dark Sword"] == 1:
                         await ctx.send("You already have this weapon")
                     else:
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": -3500}})
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Weapons.Soul Sword": 1}})
-                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Coins used": +3500}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": -4000}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Weapons.Dark Sword": 1}})
+                        uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Coins used": +4000}})
                         uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Things purchased": +1}})
-                        uinfo.update_one({"_id": 1}, {"$inc": {"Coins used": +3500}})
+                        uinfo.update_one({"_id": 1}, {"$inc": {"Coins used": +4000}})
                         uinfo.update_one({"_id": 1}, {"$inc": {"Things purchased": +1}})
-                        await ctx.send("You have bought Soul sword")
+                        await ctx.send("You have bought Dark sword")
                 else:
                     await ctx.send("You dont have enough coins")
             else:

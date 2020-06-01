@@ -4,7 +4,7 @@ import random
 import discord
 from discord.ext import commands
 
-from bot import db
+from bot import db, version
 
 attack = db["attack"]
 
@@ -344,6 +344,14 @@ class Attack(commands.Cog):
                     uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
                     uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
 
+                elif user["Active Weapon"] == "Pride2020 Sword":
+                    attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 4}})
+                    uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                    uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Lifetime coins": + 1}})
+                    uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Stats.Times attacked": + 1}})
+                    uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                    uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+
             if not boss:
                 await ctx.send("Boss is not spawned")
             elif health[0]["health"] <= 0:
@@ -419,320 +427,345 @@ class Attack(commands.Cog):
         hit = random.randint(1, 2)
         health = attack.find(
             {"guild id": f"{ctx.guild.id}"})
-        if channel:
-            for _ in gid:
-                if not user:
-                    color = ctx.author.color
-                    embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
-                    embed.add_field(name="Error:", value="Please do >register to do this command.")
-                    await ctx.send(embed=embed)
-                else:
-                    if hit == 1:
-                        if user["Active Weapon"] == "Default Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 2}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Wood Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 4}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Stone Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 6}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Flower Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 8}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Strong Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 10}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Incredible Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 10}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Destruction Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 12}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Soul Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 14}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Light Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 16}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Dark Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 16}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Destruction Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 18}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Illegal Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 18}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Reaper Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 20}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Coin Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 12}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 5}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 5}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +5}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Dragon Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 22}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Rainbow Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 22}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-
-                        elif user["Active Weapon"] == "Pink Sword":
-                            attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 30}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Lifetime coins": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.Times attacked": + 1}})
-                            uinfo.update_one({"User id": f"{ctx.author.id}"},
-                                             {"$inc": {"Stats.crits successful": +1}})
-                            uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
-                            uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
-                            await ctx.send(f"`{ctx.author}` hit the crit attack")
-                    else:
-                        await ctx.send("You missed the crit")
-
-                if not boss:
-                    await ctx.send("Boss is not spawned")
-                elif health[0]["health"] <= 0:
-                    if boss["Boss level"] == 1:
-                        ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 5}})
-                        embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
-                                              timestamp=datetime.datetime.utcnow())
-                        embed.add_field(name="Xp:", value="The guild gained 5 xp")
-                        await ctx.send(embed=embed)
-                        ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl1 killed": + 1}})
-                        ginfo.update_one({"_id": 1}, {"$inc": {"Lvl1 killed": + 1}})
-                    elif boss["Boss level"] == 5:
-                        ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 15}})
-                        embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
-                                              timestamp=datetime.datetime.utcnow())
-                        embed.add_field(name="Xp:", value="The guild gained 15 xp")
-                        await ctx.send(embed=embed)
-                        ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl5 killed": + 1}})
-                        ginfo.update_one({"_id": 1}, {"$inc": {"Lvl5 killed": + 1}})
-                    elif boss["Boss level"] == 10:
-                        ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 20}})
-                        embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
-                                              timestamp=datetime.datetime.utcnow())
-                        embed.add_field(name="Xp:", value="The guild gained 20 xp")
-                        await ctx.send(embed=embed)
-                        ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl10 killed": + 1}})
-                        ginfo.update_one({"_id": 1}, {"$inc": {"Lvl10 killed": + 1}})
-                    elif boss["Boss level"] == 15:
-                        ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 30}})
-                        embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
-                                              timestamp=datetime.datetime.utcnow())
-                        embed.add_field(name="Xp:", value="The guild gained 30 xp")
-                        await ctx.send(embed=embed)
-                        ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl15 killed": + 1}})
-                        ginfo.update_one({"_id": 1}, {"$inc": {"Lvl15 killed": + 1}})
-                    elif boss["Boss level"] == 20:
-                        ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 40}})
-                        embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
-                                              timestamp=datetime.datetime.utcnow())
-                        embed.add_field(name="Xp:", value="The guild gained 40 xp")
-                        await ctx.send(embed=embed)
-                        ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl20 killed": + 1}})
-                        ginfo.update_one({"_id": 1}, {"$inc": {"Lvl20 killed": + 1}})
-                    elif boss["Boss level"] == 25:
-                        ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 70}})
-                        embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
-                                              timestamp=datetime.datetime.utcnow())
-                        embed.add_field(name="Xp:", value="The guild gained 70 xp")
-                        await ctx.send(embed=embed)
-                        ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stat.Lvl25 killed": + 1}})
-                        ginfo.update_one({"_id": 1}, {"$inc": {"Lvl25 killed": + 1}})
-                    attack.delete_one({'guild id': f'{ctx.guild.id}'})
-
-                    if LevelUp(ctx):
-                        embed = discord.Embed(title="Level Up ^^", color=0xe386ee,
-                                              timestamp=datetime.datetime.utcnow())
-                        embed.add_field(name="LvL:",
-                                        value=f"The guild just leveled up and is now level {guild['Boss level'] + 1} ^^")
-                        await ctx.send(embed=embed)
+        if user["version"] < 0.2:
+            await ctx.send("please >update before using this command")
         else:
-            color = ctx.author.color
-            embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
-            embed.add_field(name="Error:",
-                            value="This isnt the set channel, do >setChannel to set the bots channel.")
-            await ctx.send(embed=embed)
+            if channel:
+                for _ in gid:
+                    if not user:
+                        color = ctx.author.color
+                        embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
+                        embed.add_field(name="Error:", value="Please do >register to do this command.")
+                        await ctx.send(embed=embed)
+                    else:
+                        if hit == 1:
+                            uinfo.update_one({"_id": 1}, {"$inc": {"crits made": +1}})
+                            uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                             {"$inc": {"Stats.crits made": +1}})
+                            if user["Active Weapon"] == "Default Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 2}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Wood Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 4}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Stone Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 6}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Flower Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 8}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Strong Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 10}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Incredible Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 10}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Destruction Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 12}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Soul Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 14}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Light Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 16}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Dark Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 16}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Destruction Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 18}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Illegal Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 18}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Reaper Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 20}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Coin Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 12}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 5}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 5}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +5}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Dragon Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 22}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Rainbow Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 22}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Pink Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 30}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+
+                            elif user["Active Weapon"] == "Pride2020 Sword":
+                                attack.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'health': - 8}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$inc": {"Pink coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Lifetime coins": + 1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.Times attacked": + 1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                                 {"$inc": {"Stats.crits successful": +1}})
+                                uinfo.update_one({"_id": 1}, {"$inc": {"crits successful": +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Lifetime coins': +1}})
+                                uinfo.update_one({'_id': 1}, {'$inc': {'Times attacked': +1}})
+                                await ctx.send(f"`{ctx.author}` hit the crit attack")
+                        else:
+                            await ctx.send("You missed the crit")
+                            uinfo.update_one({"_id": 1}, {"$inc": {"crits made": +1}})
+                            uinfo.update_one({"User id": f"{ctx.author.id}"},
+                                             {"$inc": {"Stats.crits made": +1}})
+
+                    if not boss:
+                        await ctx.send("Boss is not spawned")
+                    elif health[0]["health"] <= 0:
+                        if boss["Boss level"] == 1:
+                            ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 5}})
+                            embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
+                                                  timestamp=datetime.datetime.utcnow())
+                            embed.add_field(name="Xp:", value="The guild gained 5 xp")
+                            await ctx.send(embed=embed)
+                            ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl1 killed": + 1}})
+                            ginfo.update_one({"_id": 1}, {"$inc": {"Lvl1 killed": + 1}})
+                        elif boss["Boss level"] == 5:
+                            ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 15}})
+                            embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
+                                                  timestamp=datetime.datetime.utcnow())
+                            embed.add_field(name="Xp:", value="The guild gained 15 xp")
+                            await ctx.send(embed=embed)
+                            ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl5 killed": + 1}})
+                            ginfo.update_one({"_id": 1}, {"$inc": {"Lvl5 killed": + 1}})
+                        elif boss["Boss level"] == 10:
+                            ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 20}})
+                            embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
+                                                  timestamp=datetime.datetime.utcnow())
+                            embed.add_field(name="Xp:", value="The guild gained 20 xp")
+                            await ctx.send(embed=embed)
+                            ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl10 killed": + 1}})
+                            ginfo.update_one({"_id": 1}, {"$inc": {"Lvl10 killed": + 1}})
+                        elif boss["Boss level"] == 15:
+                            ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 30}})
+                            embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
+                                                  timestamp=datetime.datetime.utcnow())
+                            embed.add_field(name="Xp:", value="The guild gained 30 xp")
+                            await ctx.send(embed=embed)
+                            ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl15 killed": + 1}})
+                            ginfo.update_one({"_id": 1}, {"$inc": {"Lvl15 killed": + 1}})
+                        elif boss["Boss level"] == 20:
+                            ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 40}})
+                            embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
+                                                  timestamp=datetime.datetime.utcnow())
+                            embed.add_field(name="Xp:", value="The guild gained 40 xp")
+                            await ctx.send(embed=embed)
+                            ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stats.Lvl20 killed": + 1}})
+                            ginfo.update_one({"_id": 1}, {"$inc": {"Lvl20 killed": + 1}})
+                        elif boss["Boss level"] == 25:
+                            ginfo.update_one({'guild id': f'{ctx.guild.id}'}, {"$inc": {'Guild Xp': + 70}})
+                            embed = discord.Embed(title="The boss has been killed", color=0xe386ee,
+                                                  timestamp=datetime.datetime.utcnow())
+                            embed.add_field(name="Xp:", value="The guild gained 70 xp")
+                            await ctx.send(embed=embed)
+                            ginfo.update_one({"guild id": f"{ctx.guild.id}"}, {"$inc": {"Stat.Lvl25 killed": + 1}})
+                            ginfo.update_one({"_id": 1}, {"$inc": {"Lvl25 killed": + 1}})
+                        attack.delete_one({'guild id': f'{ctx.guild.id}'})
+
+                        if LevelUp(ctx):
+                            embed = discord.Embed(title="Level Up ^^", color=0xe386ee,
+                                                  timestamp=datetime.datetime.utcnow())
+                            embed.add_field(name="LvL:",
+                                            value=f"The guild just leveled up and is now level {guild['Boss level'] + 1} ^^")
+                            await ctx.send(embed=embed)
+            else:
+                color = ctx.author.color
+                embed = discord.Embed(colour=color, timestamp=datetime.datetime.utcnow())
+                embed.add_field(name="Error:",
+                                value="This isnt the set channel, do >setChannel to set the bots channel.")
+                await ctx.send(embed=embed)
 
 
 def setup(bot):

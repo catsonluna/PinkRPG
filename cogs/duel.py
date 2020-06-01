@@ -10,7 +10,7 @@ ginfo = db["ginfo"]
 
 uinfo = db["uinfo"]
 
-duel = db["duel"]
+duelinv = db["duelinv"]
 
 
 class Duel(commands.Cog):
@@ -22,11 +22,14 @@ class Duel(commands.Cog):
         if member is None:
             await ctx.send("Please specify who you would like to duel")
         else:
-            user1 = duel.find_one({"User1 id": f"{ctx.author.id}"})
+            user1 = duelinv.find_one({"User1 id": f"{ctx.author.id}"})
+            user2 = duelinv.find_one({"User2 id": f"{member.id}"})
             user1Info = uinfo.find_one({"User id": f"{ctx.author.id}"})
             user2Info = uinfo.find_one({"User id": f"{member.id}"})
             if user1:
                 await ctx.send("You already challenged someone")
+            elif user2:
+                await ctx.send("User has already been challenged")
             else:
                 if not user1Info:
                     await ctx.send("You must >register to use this command")
@@ -44,11 +47,9 @@ class Duel(commands.Cog):
                             await ctx.send(f"{member} dosnt have enough coins")
                         else:
                             things = {"User1 name": f"{ctx.author}", "User1 id": f"{ctx.author.id}",
-                                      "User1 health": 20,
-                                      "User2 name": f"{member}", "User2 id": f"{member.id}", "User2 health": 20,
-                                      "Accept": 0,
+                                      "User2 name": f"{member}", "User2 id": f"{member.id}",
                                       "Coins": arg2}
-                            duel.insert_one(things)
+                            duelinv.insert_one(things)
                             await ctx.send(f"{member} has been challenged")
 
     @commands.command()
@@ -56,14 +57,14 @@ class Duel(commands.Cog):
         if member is None:
             await ctx.send("Please specify whos duel you would like to accept")
         else:
-            user1 = duel.find_one({"User2 id": f"{ctx.author.id}"})
-            user2 = duel.find_one({"User1 id": f"{member.id}"})
+            user1 = duelinv.find_one({"User2 id": f"{ctx.author.id}"})
+            user2 = duelinv.find_one({"User1 id": f"{member.id}"})
             if not user1:
                 await ctx.send("No-one has invite you")
             elif not user2 and user1:
                 await ctx.send("This user hasn't invite you")
             else:
-                duel.update_one({'User1 id': f'{member.id}'}, {"$set": {'Accept': 1}})
+                duelinv.update_one({'User1 id': f'{member.id}'}, {"$set": {'Accept': 1}})
                 await ctx.send("You have accepted the duel")
 
     @commands.command()
@@ -71,8 +72,8 @@ class Duel(commands.Cog):
         if member is None:
             await ctx.send("You have to specify who your hitting")
         else:
-            duel.find_one({"User2 id": f"{ctx.author.id}"})
-            duel.find_one({"User1 id": f"{member.id}"})
+            duelinv.find_one({"User2 id": f"{ctx.author.id}"})
+            duelinv.find_one({"User1 id": f"{member.id}"})
 
 
 def setup(bot):
