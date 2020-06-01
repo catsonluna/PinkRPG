@@ -302,12 +302,12 @@ class Info(commands.Cog):
                 uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Stats.crits made": 0}})
                 uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Stats.crits successful": 0}})
                 uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"version": 0.2}})
-                await ctx.send(f"You have updated to `version 0.2`")
+                await ctx.send("You have updated to `version 0.2`")
             if user["version"] < 0.3:
                 uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"pride2020": 0}})
                 uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"Weapons.Pride2020 Sword": 0}})
                 uinfo.update_one({"User id": f"{ctx.author.id}"}, {"$set": {"version": 0.3}})
-                await ctx.send(f"You have updated to `version 0.3`")
+                await ctx.send("You have updated to `version 0.3`")
             else:
                 await ctx.send("You already are on the latest version")
 
