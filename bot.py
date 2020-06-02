@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import discord
 from discord.ext import commands
 
-version = 0.3
+version = 0.4
 
 
 def getJSON(filePathAndName):
@@ -40,7 +40,8 @@ initial_extensions = [
     "cogs.casino",
     "cogs.staff",
     "cogs.other",
-    "cogs.attack"
+    "cogs.attack",
+    "cogs.duel"
 ]
 
 bot = commands.Bot(command_prefix=get_prefix, description='yes', case_insensitive=True)
@@ -54,7 +55,7 @@ bot.load_extension("jishaku")
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game('Ima be on soon ;)'))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game('>help to get started'))
     print('Y-you tu-urned mwe on successfully daddy uwu, im looking at')
     print(bot.cogs)
     print("Guilds im in:")

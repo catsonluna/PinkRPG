@@ -8,6 +8,7 @@ from bot import db, version
 uinfo = db["uinfo"]
 attack = db["attack"]
 ginfo = db["ginfo"]
+duelfight = db["duelfight"]
 
 
 class UserInfo(commands.Cog):
@@ -157,6 +158,30 @@ class UserInfo(commands.Cog):
         embed.add_field(name="Bosses spawned", value=server["bosses spawned"], inline=False)
         embed.add_field(name="Latest version", value=version, inline=False)
         await ctx.send(embed=embed)
+
+    @commands.command(pass_context=True)
+    async def duelInfo(self, ctx):
+        user = uinfo.find_one({"User id": f"{ctx.author.id}"})
+        user1 = duelfight.find_one({"User1 id": f"{ctx.author.id}"})
+        user2 = duelfight.find_one({"User2 id": f"{ctx.author.id}"})
+        if user1:
+            color = ctx.author.color
+            embed = discord.Embed(title=f'Duel Info for: \n{user1["User1 name"]} vs {user1["User2 name"]}', colour=color, timestamp=datetime.datetime.utcnow())
+            embed.add_field(name="Player 1:", value=user1["User1 name"], inline=False)
+            embed.add_field(name="Health", value=user1["User1 health"], inline=False)
+            embed.add_field(name="Player 2", value=user1["User2 name"], inline=False)
+            embed.add_field(name="Health", value=user1["User2 health"], inline=False)
+            await ctx.send(embed=embed)
+        elif user2:
+            color = ctx.author.color
+            embed = discord.Embed(title=f'Duel info for: \n{user2["User1 name"]} vs {user2["User2 name"]}', colour=color, timestamp=datetime.datetime.utcnow())
+            embed.add_field(name="Player1:", value=user2["User1 name"], inline=False)
+            embed.add_field(name="Health:", value=user2["User1 health"], inline=False)
+            embed.add_field(name="Player2:", value=user2["User2 name"], inline=False)
+            embed.add_field(name="Health:", value=user2["User2 health"], inline=False)
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send("You are not in a duel right now")
 
 
 def setup(bot):
